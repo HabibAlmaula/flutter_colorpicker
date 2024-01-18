@@ -163,7 +163,7 @@ class ColorPicker extends StatefulWidget {
 }
 
 class ColorPickerState extends State<ColorPicker> {
-  HSVColor currentHsvColor = HSVColor.fromAHSV(0.0, 0.0, 0.0, 100.0);
+  HSVColor currentHsvColor = const HSVColor.fromAHSV(0.0, 0.0, 0.0, 1.0);
   List<Color> colorHistory = [];
 
   @override
