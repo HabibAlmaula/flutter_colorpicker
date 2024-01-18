@@ -169,9 +169,9 @@ class HSVWithValueColorPainter extends CustomPainter {
         size.width * hsvColor.hue / 360,
         size.height * (1 - hsvColor.saturation),
       ),
-      size.height * 0.04,
+      size.height * 0.07,
       Paint()
-        ..color = pointerColor ?? (useWhiteForeground(hsvColor.toColor()) ? Colors.white : Colors.black)
+        ..color = Colors.white
         ..strokeWidth = 1.5
         ..style = PaintingStyle.stroke,
     );
