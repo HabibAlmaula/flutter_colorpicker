@@ -22,6 +22,7 @@ class ColorPicker extends StatefulWidget {
     this.labelTypes = const [ColorLabelType.rgb, ColorLabelType.hsv, ColorLabelType.hsl],
     @Deprecated('Use Theme.of(context).textTheme.bodyText1 & 2 to alter text style.') this.labelTextStyle,
     this.displayThumbColor = false,
+    this.showColorIndicator = true,
     this.portraitOnly = false,
     this.colorPickerWidth = 300.0,
     this.pickerAreaHeightPercent = 1.0,
@@ -39,6 +40,7 @@ class ColorPicker extends StatefulWidget {
   final PaletteType paletteType;
   final bool enableAlpha;
   final bool showLabel;
+  final bool showColorIndicator;
   final List<ColorLabelType> labelTypes;
   final TextStyle? labelTextStyle;
   final bool displayThumbColor;
@@ -284,6 +286,7 @@ class ColorPickerState extends State<ColorPicker> {
             height: widget.colorPickerWidth * widget.pickerAreaHeightPercent,
             child: colorPicker(),
           ),
+          if(widget.showColorIndicator)
           Padding(
             padding: const EdgeInsets.fromLTRB(15.0, 5.0, 10.0, 5.0),
             child: Row(
