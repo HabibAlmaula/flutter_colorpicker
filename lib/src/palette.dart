@@ -1215,51 +1215,54 @@ class ColorPickerSlider extends StatelessWidget {
           break;
       }
 
-      return CustomMultiChildLayout(
-        delegate: _SliderLayout(),
-        children: <Widget>[
-          LayoutId(
-            id: _SliderLayout.track,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-              child: CustomPaint(
-                  painter: TrackPainter(
-                trackType,
-                hsvColor,
-              )),
+      return SizedBox(
+        height: sliderHeight,
+        child: CustomMultiChildLayout(
+          delegate: _SliderLayout(),
+          children: <Widget>[
+            LayoutId(
+              id: _SliderLayout.track,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                child: CustomPaint(
+                    painter: TrackPainter(
+                  trackType,
+                  hsvColor,
+                )),
+              ),
             ),
-          ),
-          LayoutId(
-            id: _SliderLayout.thumb,
-            child: Transform.translate(
-              offset: Offset(thumbOffset, 0.0),
-              child: CustomPaint(
-                painter: ThumbPainter(
-                  thumbColor: displayThumbColor ? thumbColor : null,
-                  fullThumbColor: fullThumbColor,
-                  height: sliderHeight,
-                  width: thumbSliderWidth,
+            LayoutId(
+              id: _SliderLayout.thumb,
+              child: Transform.translate(
+                offset: Offset(thumbOffset, 0.0),
+                child: CustomPaint(
+                  painter: ThumbPainter(
+                    thumbColor: displayThumbColor ? thumbColor : null,
+                    fullThumbColor: fullThumbColor,
+                    height: sliderHeight,
+                    width: thumbSliderWidth,
+                  ),
                 ),
               ),
             ),
-          ),
-          LayoutId(
-            id: _SliderLayout.gestureContainer,
-            child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints box) {
-                RenderBox? getBox = context.findRenderObject() as RenderBox?;
-                return GestureDetector(
-                  onPanDown: (DragDownDetails details) => getBox != null
-                      ? slideEvent(getBox, box, details.globalPosition)
-                      : null,
-                  onPanUpdate: (DragUpdateDetails details) => getBox != null
-                      ? slideEvent(getBox, box, details.globalPosition)
-                      : null,
-                );
-              },
+            LayoutId(
+              id: _SliderLayout.gestureContainer,
+              child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints box) {
+                  RenderBox? getBox = context.findRenderObject() as RenderBox?;
+                  return GestureDetector(
+                    onPanDown: (DragDownDetails details) => getBox != null
+                        ? slideEvent(getBox, box, details.globalPosition)
+                        : null,
+                    onPanUpdate: (DragUpdateDetails details) => getBox != null
+                        ? slideEvent(getBox, box, details.globalPosition)
+                        : null,
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     });
   }
