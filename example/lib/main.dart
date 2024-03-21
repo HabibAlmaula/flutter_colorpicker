@@ -31,44 +31,61 @@ class _MyAppState extends State<MyApp> {
         return DefaultTabController(
           length: 3,
           child: Scaffold(
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () => setState(() => lightTheme = !lightTheme),
-              icon: Icon(lightTheme ? Icons.dark_mode_rounded : Icons.light_mode_rounded),
-              label: Text(lightTheme ? 'Night' : '  Day '),
-              backgroundColor: currentColor,
-              foregroundColor: foregroundColor,
-              elevation: 15,
-            ),
-            appBar: AppBar(
-              title: const Text('Flutter Color Picker Example'),
-              backgroundColor: currentColor,
-              foregroundColor: foregroundColor,
-              bottom: TabBar(
-                labelColor: foregroundColor,
-                tabs: const <Widget>[
-                  Tab(text: 'HSV/HSL/RGB'),
-                  Tab(text: 'Material'),
-                  Tab(text: 'Blocky'),
+            // floatingActionButton: FloatingActionButton.extended(
+            //   onPressed: () => setState(() => lightTheme = !lightTheme),
+            //   icon: Icon(lightTheme ? Icons.dark_mode_rounded : Icons.light_mode_rounded),
+            //   label: Text(lightTheme ? 'Night' : '  Day '),
+            //   backgroundColor: currentColor,
+            //   foregroundColor: foregroundColor,
+            //   elevation: 15,
+            // ),
+            // appBar: AppBar(
+            //   title: const Text('Flutter Color Picker Example'),
+            //   backgroundColor: currentColor,
+            //   foregroundColor: foregroundColor,
+            //   bottom: TabBar(
+            //     labelColor: foregroundColor,
+            //     tabs: const <Widget>[
+            //       Tab(text: 'HSV/HSL/RGB'),
+            //       Tab(text: 'Material'),
+            //       Tab(text: 'Blocky'),
+            //     ],
+            //   ),
+            // ),
+            // body: TabBarView(
+            //   children: <Widget>[
+            //     HSVColorPickerExample(
+            //       pickerColor: currentColor,
+            //       onColorChanged: changeColor,
+            //       colorHistory: colorHistory,
+            //       onHistoryChanged: (List<Color> colors) => colorHistory = colors,
+            //     ),
+            //     MaterialColorPickerExample(pickerColor: currentColor, onColorChanged: changeColor),
+            //     BlockColorPickerExample(
+            //       pickerColor: currentColor,
+            //       onColorChanged: changeColor,
+            //       pickerColors: currentColors,
+            //       onColorsChanged: changeColors,
+            //       colorHistory: colorHistory,
+            //     ),
+            //   ],
+            // ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ColorPickerSlider(
+                      TrackType.hue,
+                      HSVColor.fromColor(currentColor),
+                          (value) {
+                        changeColor(value.toColor());
+                      },
+                    sliderHeight: 100.0,
+                    thumbSliderWidth: 12,
+                  ),
+                  Text('Color: $currentColor'),
                 ],
               ),
-            ),
-            body: TabBarView(
-              children: <Widget>[
-                HSVColorPickerExample(
-                  pickerColor: currentColor,
-                  onColorChanged: changeColor,
-                  colorHistory: colorHistory,
-                  onHistoryChanged: (List<Color> colors) => colorHistory = colors,
-                ),
-                MaterialColorPickerExample(pickerColor: currentColor, onColorChanged: changeColor),
-                BlockColorPickerExample(
-                  pickerColor: currentColor,
-                  onColorChanged: changeColor,
-                  pickerColors: currentColors,
-                  onColorsChanged: changeColors,
-                  colorHistory: colorHistory,
-                ),
-              ],
             ),
           ),
         );

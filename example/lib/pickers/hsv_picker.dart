@@ -64,6 +64,38 @@ class _HSVColorPickerExampleState extends State<HSVColorPickerExample> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
+        ElevatedButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  titlePadding: const EdgeInsets.all(0),
+                  contentPadding: const EdgeInsets.all(0),
+                  content: SizedBox(
+                    height: 100,
+                    width: 200,
+                    child: ColorPickerSlider(
+                        TrackType.hue,
+                        HSVColor.fromColor(widget.pickerColor),
+                            (value) {
+                          widget.onColorChanged(value.toColor());
+                        }),
+                  ),
+                );
+              },
+            );
+          },
+          child: Text(
+            'Color Picker Slider',
+            style: TextStyle(color: useWhiteForeground(widget.pickerColor) ? Colors.white : Colors.black),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: widget.pickerColor,
+            shadowColor: widget.pickerColor.withOpacity(1),
+            elevation: 10,
+          ),
+        ),
         const SizedBox(height: 20),
         Row(
           mainAxisSize: MainAxisSize.min,
@@ -82,7 +114,7 @@ class _HSVColorPickerExampleState extends State<HSVColorPickerExample> {
                           pickerColor: widget.pickerColor,
                           onColorChanged: widget.onColorChanged,
                           colorPickerWidth: 300,
-                          pickerAreaHeightPercent: 0.7,
+                          pickerAreaHeightPercent: 0.5,
                           enableAlpha: _enableAlpha,
                           labelTypes: _labelTypes,
                           displayThumbColor: _displayThumbColor,
