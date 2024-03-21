@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
                           (value) {
                         changeColor(value.toColor());
                       },
-                    sliderHeight: 100.0,
+                    sliderHeight: 50.0,
                     thumbSliderWidth: 12,
                   ),
                   Text('Color: $currentColor'),

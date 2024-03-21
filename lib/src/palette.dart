@@ -637,9 +637,9 @@ class _SliderLayout extends MultiChildLayoutDelegate {
     positionChild(thumb, Offset(0.0, size.height * 0.4));
     layoutChild(
       gestureContainer,
-      BoxConstraints.tightFor(width: size.width, height: size.height),
+      BoxConstraints.tightFor(width: size.width, height: size.height*0.6),
     );
-    positionChild(gestureContainer, Offset.zero);
+    positionChild(gestureContainer, Offset(0.0, size.height * 0.4));
   }
 
   @override
