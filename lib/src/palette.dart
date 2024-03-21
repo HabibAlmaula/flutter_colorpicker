@@ -629,12 +629,12 @@ class _SliderLayout extends MultiChildLayoutDelegate {
         height: size.height / 1.7,
       ),
     );
-    positionChild(track, Offset(15.0, size.height * 0.4));
+    positionChild(track, Offset(15.0, size.height*0.2 ));
     layoutChild(
       thumb,
       BoxConstraints.tightFor(width: 5.0, height: size.height / 1.7),
     );
-    positionChild(thumb, Offset(0.0, size.height * 0.4));
+    positionChild(thumb, Offset(0.0, size.height*0.2));
     layoutChild(
       gestureContainer,
       BoxConstraints.tightFor(width: size.width, height: size.height*0.6),
@@ -1215,54 +1215,51 @@ class ColorPickerSlider extends StatelessWidget {
           break;
       }
 
-      return SizedBox(
-        height: sliderHeight,
-        child: CustomMultiChildLayout(
-          delegate: _SliderLayout(),
-          children: <Widget>[
-            LayoutId(
-              id: _SliderLayout.track,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                child: CustomPaint(
-                    painter: TrackPainter(
-                  trackType,
-                  hsvColor,
-                )),
-              ),
+      return CustomMultiChildLayout(
+        delegate: _SliderLayout(),
+        children: <Widget>[
+          LayoutId(
+            id: _SliderLayout.track,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              child: CustomPaint(
+                  painter: TrackPainter(
+                trackType,
+                hsvColor,
+              )),
             ),
-            LayoutId(
-              id: _SliderLayout.thumb,
-              child: Transform.translate(
-                offset: Offset(thumbOffset, 0.0),
-                child: CustomPaint(
-                  painter: ThumbPainter(
-                    thumbColor: displayThumbColor ? thumbColor : null,
-                    fullThumbColor: fullThumbColor,
-                    height: sliderHeight,
-                    width: thumbSliderWidth,
-                  ),
+          ),
+          LayoutId(
+            id: _SliderLayout.thumb,
+            child: Transform.translate(
+              offset: Offset(thumbOffset, 0.0),
+              child: CustomPaint(
+                painter: ThumbPainter(
+                  thumbColor: displayThumbColor ? thumbColor : null,
+                  fullThumbColor: fullThumbColor,
+                  height: sliderHeight,
+                  width: thumbSliderWidth,
                 ),
               ),
             ),
-            LayoutId(
-              id: _SliderLayout.gestureContainer,
-              child: LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints box) {
-                  RenderBox? getBox = context.findRenderObject() as RenderBox?;
-                  return GestureDetector(
-                    onPanDown: (DragDownDetails details) => getBox != null
-                        ? slideEvent(getBox, box, details.globalPosition)
-                        : null,
-                    onPanUpdate: (DragUpdateDetails details) => getBox != null
-                        ? slideEvent(getBox, box, details.globalPosition)
-                        : null,
-                  );
-                },
-              ),
+          ),
+          LayoutId(
+            id: _SliderLayout.gestureContainer,
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints box) {
+                RenderBox? getBox = context.findRenderObject() as RenderBox?;
+                return GestureDetector(
+                  onPanDown: (DragDownDetails details) => getBox != null
+                      ? slideEvent(getBox, box, details.globalPosition)
+                      : null,
+                  onPanUpdate: (DragUpdateDetails details) => getBox != null
+                      ? slideEvent(getBox, box, details.globalPosition)
+                      : null,
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       );
     });
   }
